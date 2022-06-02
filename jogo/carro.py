@@ -7,11 +7,23 @@ VERTICAL = 0
 HORIZONTAL = 1
 
 class Carro():
-    def __init__(self, direcao,sentido, velocidade):
-        self.velocidade = 0
+    def __init__(self, direcao,sentido=VERTICAL, velocidade=10, position=(0,0), carro_path="img/carro.png"):
+        self.position = position
+        self.velocidade = velocidade
         self.direcao = VERTICAL # 0 - vertical, 1 - horizontal
         self.sentido = FRENTE  # 0 - esquerda, 1 - direita
+        self.carro_path = carro_path
+
         #print("Meu carrão está sendo criado")
+
+    def setPosition(self, position=(0,0)):
+        self.position = position
+
+    def getPosition(self):
+        return self.position
+
+    def getStatus(self):
+        return self.status
 
     def acelerar(self):
         self.velocidade += 10
@@ -31,5 +43,8 @@ class Carro():
     def frente(self):
         self.sentido = FRENTE
 
-    def carregar_imagem(self, caminho):
-        return caminho
+    def setImage(self, carro_path):
+        self.carro_path = carro_path
+
+    def getImagem(self):
+        return self.carro_path
