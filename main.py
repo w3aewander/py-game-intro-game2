@@ -31,8 +31,13 @@ carro1.velocidade = 10
 coluna, linha = 150, 400
 carro1.setPosition( (coluna, linha) )
 
+screen.blit(fundo, (coluna_pista, linha_pista) )
+
 # obtém a posição do carro
 screen.blit(carro, carro1.getPosition())
+
+
+pygame.display.update
 
 # mover a pista para baixo
 def mover_fundo(position=(coluna_pista, linha_pista)):
