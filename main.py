@@ -16,11 +16,11 @@ screen=pygame.display.set_mode((width,height))
 
 pygame.display.set_caption("Meu primeiro jogo")
 
-fundo_path = "img/pista.jpg"
+#fundo_path = "img/pista.jpg"
 carro_path = "img/carro1.png"
 
-fundo = pygame.image.load(fundo_path)
-fundo = pygame.transform.scale(fundo, (800, 600))
+#fundo = pygame.image.load(fundo_path)
+#fundo = pygame.transform.scale(fundo, (800, 600))
 
 carro1 = pygame.image.load(carro_path)
 carro2 = pygame.image.load(carro_path)
@@ -30,15 +30,15 @@ carro4 = pygame.image.load(carro_path)
 # define a posição do carro na tela.
 coluna, linha = 0, 0
 
-screen.blit(fundo, (coluna_pista, linha_pista) )
+#screen.blit(fundo, (0, 0) )
 
+screen.fill((0,0,0))
 pygame.display.flip()
 
 # mover a pista para baixo
 def mover_fundo(position=(coluna_pista, linha_pista)):
     if position[0] >= 600:
-        position[0] = 0
-
+        position[0] = -10
     screen.blit(fundo, position)
 
 def escrever_texto(posicao=(0,0), texto="texto", corTexto=(0,0,0), corFundo=(255,255,255)):
@@ -49,11 +49,8 @@ def escrever_texto(posicao=(0,0), texto="texto", corTexto=(0,0,0), corFundo=(255
     textRect.center = posicao
     screen.blit(t,textRect)
 
-#mover_fundo((coluna_pista, linha_pista))
-
-
-def desenha_retangulo():
-    pygame.draw.rect(screen, (255,0,0), pygame.Rect(230, 230, 100, 100))
+def desenha_retangulo(cor=(255,255,255), rect=(230, 230, 50, 200) ):
+    pygame.draw.rect(screen, cor, pygame.Rect(rect))
 
 def desenha_circulo(cor=(255,255,255), pos=(10,10)):
     pygame.draw.circle(screen, cor, pos, 100, 50 )
@@ -68,8 +65,6 @@ while True:
 
     if linha_carro2 < -650:
         linha_carro2 = +850
-
-    desenha_retangulo()
 
     # desenha_circulo(cor=(255,255,0), pos=(550,300))
     # desenha_circulo( pos=(500,400) )
@@ -117,11 +112,17 @@ while True:
     #if linha < 409: linha= 409
     #if linha < 30: linha = 30
 
+    # screen.fill((0, 0, 0), fundo.get_rect())
+    screen.fill((0, 0, 0))
 
-    #linha_pista += 100
-    #mover_fundo( position=(coluna_pista, linha_pista))
+    pygame.draw.circle(screen,
+                     (random.randint(0,255),
+                      random.randint(0,255),
+                      random.randint(0,255)), (random.randint(0,800),random.randint(0,600)),4 )
+    linha_pista += .9
+    if linha_pista > 600: linha_pista = - 250
 
-    mover_fundo(position=(coluna_pista, linha_pista))
+    desenha_retangulo(cor=(255, 255, 255), rect=((screen.get_width() - 25) / 2, linha_pista, 25, 200))
 
     screen.blit(carro1, (coluna, linha))
     screen.blit(carro2, (coluna_carro2, linha_carro2))
@@ -130,6 +131,7 @@ while True:
 
     pygame.display.flip()
 
+    #linha_pista += 100
 
     for eve in pygame.event.get():
         if eve.type==pygame.QUIT:
