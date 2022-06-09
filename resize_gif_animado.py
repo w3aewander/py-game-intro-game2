@@ -9,8 +9,6 @@ clock = pygame.time.Clock()
 
 boneco_animado = Image.open("img/boneco_malabares.gif")
 
-
-
 current_frame = 0
 
 pygame.init()
@@ -38,11 +36,15 @@ while True:
 
     screen.blit(picture, (0,0))
 
-    pygame.display.update()
+    screen.fill( (0,0,0))
+
     frame_boneco = pil_to_game(get_gif_frame(boneco_animado, current_frame))
-    screen.blit(frame_boneco, (30,20 ))
+    frame_boneco = pygame.transform.scale(frame_boneco, (240, 220))
+    screen.blit(frame_boneco, (30,20))
+    screen.blit(frame_boneco, (270, 20))
 
     current_frame = (current_frame + 1) % boneco_animado.n_frames
+
 
     if not getattr(boneco_animado, "is_animated", False):
         print("Imagem em não é um gif animado")
