@@ -41,7 +41,7 @@ while True:
     frame_boneco = pil_to_game(get_gif_frame(boneco_animado, current_frame))
     frame_boneco = pygame.transform.scale(frame_boneco, (240, 220))
     screen.blit(frame_boneco, (30,20))
-    screen.blit(frame_boneco, (270, 20))
+    screen.blit(frame_boneco, (270, 120))
 
     current_frame = (current_frame + 1) % boneco_animado.n_frames
 
