@@ -1,6 +1,5 @@
 import pygame
-
-coluna, linha = 400, 300
+from jogo import parametros as parm
 
 def ctrl_key(keys):
 
@@ -8,14 +7,14 @@ def ctrl_key(keys):
     global coluna
 
     if keys[pygame.K_LEFT]:
-        coluna -= 1
+        parm.coluna -= 1
 
     if keys[pygame.K_RIGHT]:
-        coluna += 1
+        parm.coluna += 1
 
     if keys[pygame.K_UP]:
-        linha -= 1
+        parm.linha -= 1
 
     if keys[pygame.K_DOWN]:
-        linha += 1
+        parm.linha += 1
 
