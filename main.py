@@ -67,13 +67,7 @@ while True:
     keys = pygame.key.get_pressed()
 
     ctrl.ctrl_key(keys)
-
-    if parm.linha > 560: parm.linha = 560
-
     screen.fill((0, 0, 0))
-
-    parm.linha_pista += 1.5
-    if parm.linha_pista > 600: parm.linha_pista = - 250
 
     g.desenha_retangulo(screen,cor=(255, 255, 255), rect=((screen.get_width() - 25) / 2, parm.linha_pista, 25, 200))
 
@@ -86,12 +80,17 @@ while True:
         g.escrever_texto(screen, (720, 18), "Você perdeu!")
         pygame.display.update()
         time.sleep(5)
-
         quit(0)
 
-    if vida < 25:
+    if  parm.voltas > 100:
+        g.escrever_texto(screen, (720, 18), "Parabéns, você chegou ao final da corrida.")
+        pygame.display.update()
+        time.sleep(2)
+        quit(0)
+
+    if vida <= 50:
         cor_vida = (255, 0, 0)
-    elif vida < 50:
+    elif vida <= 75:
         cor_vida = (255,255,0)
     else:
         cor_vida = (0,255,0)
@@ -107,7 +106,7 @@ while True:
     ]
 
     if col.colisao(obj_carro, objetos):
-        vida = vida - .1
+        vida = vida - .2
 
     g.indicador_vida(screen, cor=cor_vida, rect=(300, 0, vida, 50))
     g.escrever_texto(screen, (50,50), f"Volta: {parm.voltas}")
@@ -117,7 +116,7 @@ while True:
         parm.linha_pista = 0
         parm.voltas += 1
 
-    parm.linha_pista += 1
+    parm.linha_pista += 2
 
     s = "[{0},{1}]".format(parm.coluna, parm.linha)
     g.escrever_texto(screen, (720,18), s)
