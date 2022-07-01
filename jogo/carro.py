@@ -26,7 +26,7 @@ class Carro():
         return self.status
 
     def acelerar(self):
-        self.velocidade += 10
+        self.velocidade += 5
 
     def freiar(self):
         self.velocidade = 0

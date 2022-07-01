@@ -1,3 +1,10 @@
+#############################################################
+#
+# Desenvolvimento de algoritmo - lógica de programação 
+# @author Wanderlei Silva do Carmo <wander.silva@gmail.com>
+#
+#############################################################
+
 import time
 
 from PIL import Image
@@ -5,18 +12,19 @@ import random
 
 import pygame
 import sys
-from jogo import \
-    controles as ctrl, \
-    parametros as parm, \
-    graficos as g, \
-    colisao as col
+
+from jogo import controles as ctrl
+from jogo import parametros as parm
+from jogo import graficos as g
+from jogo import colisao as col
+from jogo import parametros
 
 from jogo.parametros import *
 
-pygame.mixer.init()
+#pygame.mixer.init()
 pygame.init()
 
-global som_carro
+#global som_carro
 global size
 global width
 global height
@@ -28,8 +36,8 @@ screen = pygame.display.set_mode((parm.width,parm.height))
 
 pygame.display.set_caption("Meu primeiro jogo")
 
-carro_path = "img/carro1.png"
-carro_player_1 = "img/car_forward.gif"
+carro_path = "./img/carro1.png"
+carro_player_1 = "./img/car_forward.gif"
 
 FORMAT = "RGBA"
 
@@ -39,7 +47,7 @@ carro3 = pygame.image.load(carro_path)
 carro4 = pygame.image.load(carro_path)
 
 clock = pygame.time.Clock()
-carr_player_1_gif = Image.open("img/car_forward.gif")
+carr_player_1_gif = Image.open("./img/car_forward.gif")
 current_frame = 0
 
 #screen.blit(fundo, (0, 0) )
@@ -106,7 +114,7 @@ while True:
     ]
 
     if col.colisao(obj_carro, objetos):
-        vida = vida - .2
+        vida = vida - .6
 
     g.indicador_vida(screen, cor=cor_vida, rect=(300, 0, vida, 50))
     g.escrever_texto(screen, (50,50), f"Volta: {parm.voltas}")
@@ -116,14 +124,13 @@ while True:
         parm.linha_pista = 0
         parm.voltas += 1
 
-    parm.linha_pista += 2
+    # velocidade do objeto pista.... 
+    parm.linha_pista += parametros.velocidade
 
     s = "[{0},{1}]".format(parm.coluna, parm.linha)
     g.escrever_texto(screen, (720,18), s)
 
     pygame.display.flip()
-
-
 
     for eve in pygame.event.get():
         if eve.type==pygame.QUIT:
